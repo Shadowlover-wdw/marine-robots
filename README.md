@@ -13,17 +13,17 @@
 ### 快速运行
 
 1. 安装依赖：ROS 2 Humble、Gazebo Harmonic、ArduSub SITL、MAVProxy（详见包内 `Deploy.md`）。
-2. 下载并解压 Release 资产：
+2. 下载并解压到 `~/ROS2_Gazebo_Simulator`（与包内文档路径一致）：
 
    ```bash
-   unzip ROV_simulation_early-v0.1.0.zip
-   cd ROV_simulation_early-v0.1.0
+   unzip ROV_simulation_early-v0.1.0.zip -d ~
+   mv ~/ROV_simulation_early-v0.1.0 ~/ROS2_Gazebo_Simulator
    ```
 
 3. 构建：
 
    ```bash
-   cd rov_ws
+   cd ~/ROS2_Gazebo_Simulator/rov_ws
    source /opt/ros/humble/setup.bash
    colcon build --packages-select rov_gazebo rov_description rov_control
    source install/setup.bash
@@ -32,7 +32,7 @@
 4. 运行：
 
    ```bash
-   cd ..
+   cd ~/ROS2_Gazebo_Simulator
    ./run.sh A          # 模式 A：纯 Gazebo + ROS2 控制，无需额外插件
    ./run.sh B          # 模式 B：ArduSub SITL + ArduPilotPlugin（需先编译插件）
    ./run.sh C          # 模式 C：SITL 原生物理 + 可视化（停更/备选）
