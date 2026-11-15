@@ -1,14 +1,13 @@
 # Marine Robots
 
-水下机器人相关成果的发布仓库。本仓库**不镜像完整工程**，源码包以 Release 资产形式提供。
+水下机器人相关成果的发布仓库。源码包以 Release 资产形式提供。
 
-## ROV 水下仿真 · 早期最小版 v0.1.2-early
+## ROV 水下仿真 · 早期最小版 v0.1.3-early
 
-基于 **ROS 2 Humble + Gazebo Harmonic + ArduSub SITL** 的 8 推进器 ROV 仿真环境，已剥离后续研究模块和预编译 Gazebo 插件。飞控使用**公版 ArduPilot（ArduSub SITL）**，地面站使用**公版 QGroundControl**，无需定制飞控或地面站。
+基于 **ROS 2 Humble + Gazebo Harmonic + ArduSub SITL** 的 8 推进器 ROV 仿真环境，聚焦水下仿真与公版 ArduPilot / QGC 联调。飞控使用**公版 ArduPilot（ArduSub SITL）**，地面站使用**公版 QGroundControl**，无需定制飞控或地面站。
 
-- 下载：[v0.1.2-early](https://github.com/Shadowlover-wdw/marine-robots/releases/tag/v0.1.2-early)
+- 下载：[v0.1.3-early](https://github.com/Shadowlover-wdw/marine-robots/releases/tag/v0.1.3-early)
 - 包含：`rov_ws`（`rov_control` / `rov_description` / `rov_gazebo`）、`run.sh`、`README.md`、`Deploy.md`、`CONTROL_PIPELINE.md`
-- 不包含：`rov_drl`、`rov_pinn`、`rov_SINS`、`rov_gz_eval`，以及预编译的 Gazebo `.so` 插件
 - 自研与第三方：ROV 模型、物理参数配置、推力器布局与 SITL 联调脚本为自研；ROS 2、Gazebo、ArduPilot / ArduSub SITL、ArduPilotPlugin、QGroundControl 为公版第三方依赖（插件需自行编译）
 
 ### 快速运行
@@ -17,8 +16,8 @@
 2. 下载并解压到 `~/ROS2_Gazebo_Simulator`（与包内文档路径一致）：
 
    ```bash
-   unzip ROV_simulation_early-v0.1.2.zip -d ~
-   mv ~/ROV_simulation_early-v0.1.2 ~/ROS2_Gazebo_Simulator
+   unzip ROV_simulation_early-v0.1.3.zip -d ~
+   mv ~/ROV_simulation_early-v0.1.3 ~/ROS2_Gazebo_Simulator
    ```
 
 3. 构建：
@@ -56,6 +55,7 @@
 
 ### 版本说明
 
-- **v0.1.2-early**：文档收敛为 ROV，补充公版 ArduPilot / QGroundControl 完整部署与运行步骤。
+- **v0.1.3-early**：文档保持 ROV 单一路径，补充公版 ArduPilot / QGroundControl 完整部署与运行步骤。
+- **v0.1.2-early**：文档收敛为 ROV。
 - **v0.1.1-early**：早期文档修订版。
 - **v0.1.0-early**：首个早期最小版。
