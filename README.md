@@ -67,6 +67,12 @@ SERVO7_FUNCTION 39
 SERVO8_FUNCTION 40
 ```
 
+**自查方式**：
+
+1. QGC → Parameters 搜索 `FRAME_CONFIG`，应为 `2`；再查 `SERVO7_FUNCTION`/`SERVO8_FUNCTION`，应分别为 `39`/`40`。若仍是 `1`/`0`，说明参数没写入或 SITL 没重启。
+2. 解锁后给很小的升沉指令，或用 QGC Motor Test 单独测试 5–8 号电机：4 个垂直推进器都应参与输出。若只有 5/6 转、7/8 不转，说明机架配置仍未生效。
+3. 若 5–8 都参与但升沉仍明显低头/抬头，再查 `MOT_5_DIRECTION`～`MOT_8_DIRECTION` 和桨叶方向；若只是上升/下潜方向相反，改 QGC 摇杆反向或 `RC3_REVERSED`，不要改电机方向。
+
 修复只改公版 ArduSub 参数。
 
 ### 版本说明
