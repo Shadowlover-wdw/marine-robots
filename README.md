@@ -53,6 +53,22 @@
 
 无 GUI 加 `--headless`，软件渲染加 `--software`。
 
+### 已知问题：QGC 遥控升沉时 ROV 翻覆（公版 ArduSub 默认机架）
+
+**现象**：QGC 虚拟手柄前后、横移、左旋/右旋都正常，但一给上升/下潜，ROV 就翻。
+
+**原因**：包内模型是 8 推进器（4 水平 + 4 垂直），而公版 ArduSub 的 `FRAME_CONFIG` 默认是 `1`（VECTORED，6 电机），只启用 `SERVO1..6`。升沉时只驱动 5/6 两个前置垂直桨，推力线不过 CoG，满推约 `2×29.43 N × 0.136 m ≈ 8 N·m` 俯仰力矩；VECTORED 所有电机的 pitch 因子都是 `0`，飞控无法反打，所以一升沉就翻。浮心只比 CoG 高 8.8 mm（最大恢复力矩 0.76 N·m），会加重空载沉底侧躺，但不是本次翻覆的主因。
+
+**修复**：QGC → Parameters，把 `FRAME_CONFIG` 改为 `2`（Vectored_6DOF），并确认 `SERVO7_FUNCTION=39`、`SERVO8_FUNCTION=40`，重启 SITL。也可直接修改包内 `rov_ws/src/rov_gazebo/config/ardusub_modeb.parm`，加入：
+
+```ini
+FRAME_CONFIG 2
+SERVO7_FUNCTION 39
+SERVO8_FUNCTION 40
+```
+
+修复只用公版 ArduSub 参数，不依赖自研控制模块。
+
 ### 版本说明
 
 - **v0.1.3-early**：文档保持 ROV 单一路径，补充公版 ArduPilot / QGroundControl 完整部署与运行步骤。
